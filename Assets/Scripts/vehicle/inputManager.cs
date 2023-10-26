@@ -1,32 +1,16 @@
-﻿
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.InputSystem;
+using System;
 
-public class inputManager : MonoBehaviour{
-
-
-   
+public class inputManager : MonoBehaviour
+{
     [HideInInspector]public float vertical;
     [HideInInspector]public float horizontal;
     [HideInInspector]public bool handbrake;
     [HideInInspector]public bool boosting;
 
-
-    void Update()
-    {
-        keyboard();
-    }
-
-    public void keyboard () {
-        vertical = Input.GetAxis ("Vertical");
-        horizontal = Input.GetAxis ("Horizontal");
-        handbrake = (Input.GetAxis ("Jump") != 0) ? true : false;
-        if (Input.GetKey (KeyCode.LeftShift)) boosting = true;
-        else boosting = false;
-
-    }
-
-
-
+    public void OnMoveVertical(InputValue value) =>vertical = value.Get<Vector2>().y;
+    public void OnMoveHorizontal(InputValue value) => horizontal = value.Get<Vector2>().x;
+    public void OnHandbrake(InputValue value) => handbrake = Convert.ToBoolean(value.Get<float>());
+    public void OnBoosting(InputValue value) => boosting = Convert.ToBoolean(value.Get<float>());
 }

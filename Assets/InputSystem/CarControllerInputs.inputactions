@@ -40,11 +40,29 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "GearUp",
+                    "type": "Value",
+                    "id": "148f81a3-8c2a-41fe-aba4-bb7cc330dba9",
+                    "expectedControlType": "Digital",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "GearDown",
+                    "type": "Value",
+                    "id": "8a64c84f-5cfa-4f9a-b6f6-3c63e2d80fa8",
+                    "expectedControlType": "Digital",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
                 {
-                    "name": "AD",
+                    "name": "Keyboard",
                     "id": "00ca640b-d935-4593-8157-c05846ea39b3",
                     "path": "Dpad",
                     "interactions": "",
@@ -114,14 +132,14 @@
                     "id": "72877d9d-cc14-498e-9a04-9f567dcb02a0",
                     "path": "<Joystick>/stick",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "ScaleVector2(x=3)",
                     "groups": "Joystick",
                     "action": "MoveHorizontal",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "WS",
+                    "name": "Keyboard",
                     "id": "f9837301-cff2-4182-9fee-9bd221e60add",
                     "path": "Dpad",
                     "interactions": "",
@@ -176,7 +194,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "Left/Right Trigger",
+                    "name": "Gamepad",
                     "id": "76ca6f3b-176a-4ee6-a312-fa92735828bb",
                     "path": "2DVector(mode=2)",
                     "interactions": "",
@@ -231,7 +249,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "2D Vector",
+                    "name": "Pedals",
                     "id": "a1241faf-61d2-4974-8025-08e1155c584d",
                     "path": "2DVector(mode=2)",
                     "interactions": "",
@@ -280,7 +298,18 @@
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad;Joystick",
+                    "groups": "Gamepad",
+                    "action": "Handbrake",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f6f51de8-ee61-4396-b3ff-97fe2f062aa1",
+                    "path": "<Joystick>/button9",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Joystick",
                     "action": "Handbrake",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -304,6 +333,83 @@
                     "processors": "",
                     "groups": "Gamepad;Joystick",
                     "action": "Boosting",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "74a30b48-9a22-44cd-855c-9194d94d652a",
+                    "path": "<Joystick>/button10",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Joystick",
+                    "action": "Boosting",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f0a620cd-96aa-455a-bf51-67ed7edc5ac8",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "GearUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0212ea8c-87da-431b-b293-c92e5a543c01",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "GearUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5ff6f6d3-1a66-4827-9883-6440b56d6140",
+                    "path": "<Joystick>/button2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Joystick",
+                    "action": "GearUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "495b9f32-7585-4419-81e5-800fa9f87c88",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "GearDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "10e4bc59-3a78-407e-8a8b-4d08aa5adc18",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "GearDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e30be3a3-50fe-4ed6-8b5b-06c5136d2481",
+                    "path": "<Joystick>/trigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Joystick",
+                    "action": "GearDown",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

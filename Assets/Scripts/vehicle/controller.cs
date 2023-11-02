@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 [RequireComponent(typeof(wheelsManager))]
@@ -63,9 +64,11 @@ public class controller : MonoBehaviour
     private float animatorTurnAngle;
 
     private bool reverse = false;
-    private bool lightsFlag ; 
-    private bool grounded ;
-    private bool engineLerp ;
+    private bool lightsFlag; 
+    private bool grounded;
+    private bool engineLerp;
+    private bool gearUp;
+    private bool gearDown;
 
     private void Start()
     {
@@ -180,15 +183,16 @@ public class controller : MonoBehaviour
 
     public void manual()
     {
-        if((Input.GetAxis("Fire2") == 1  ) && gearNum <= gears.Length && Time.time >= gearChangeRate )
+        gearUp = IM.gearUp;
+        gearDown = IM.gearDown;
+        if (gearUp == true && gearNum <= gears.Length && Time.time >= gearChangeRate )
         {
             gearNum  = gearNum +1;
             gearChangeRate = Time.time + 1f/3f ;
             setEngineLerp(engineRPM - ( engineRPM > 1500 ? 2000 : 700));
             audio.DownShift();
-
         }
-        if((Input.GetAxis("Fire3") == 1 ) && gearNum >= 1  && Time.time >= gearChangeRate)
+        if(gearDown == true && gearNum >= 1  && Time.time >= gearChangeRate)
         {
             gearChangeRate = Time.time + 1f/3f ;
             gearNum --;

@@ -44,17 +44,6 @@
             ],
             "bindings": [
                 {
-                    "name": "",
-                    "id": "978bfe49-cc26-4a3d-ab7b-7d7a29327403",
-                    "path": "<Gamepad>/leftStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Gamepad",
-                    "action": "MoveHorizontal",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
                     "name": "AD",
                     "id": "00ca640b-d935-4593-8157-c05846ea39b3",
                     "path": "Dpad",
@@ -71,7 +60,7 @@
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse",
+                    "groups": "Keyboard&Mouse",
                     "action": "MoveHorizontal",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -82,7 +71,7 @@
                     "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse",
+                    "groups": "Keyboard&Mouse",
                     "action": "MoveHorizontal",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -93,7 +82,7 @@
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse",
+                    "groups": "Keyboard&Mouse",
                     "action": "MoveHorizontal",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -104,10 +93,32 @@
                     "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse",
+                    "groups": "Keyboard&Mouse",
                     "action": "MoveHorizontal",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "978bfe49-cc26-4a3d-ab7b-7d7a29327403",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "MoveHorizontal",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "72877d9d-cc14-498e-9a04-9f567dcb02a0",
+                    "path": "<Joystick>/stick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Joystick",
+                    "action": "MoveHorizontal",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 },
                 {
                     "name": "WS",
@@ -167,16 +178,16 @@
                 {
                     "name": "Left/Right Trigger",
                     "id": "76ca6f3b-176a-4ee6-a312-fa92735828bb",
-                    "path": "2DVector",
+                    "path": "2DVector(mode=2)",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "NormalizeVector2",
                     "groups": "",
                     "action": "MoveVertical",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "up",
+                    "name": "Up",
                     "id": "d1962bf2-856c-4aa5-b713-02e8565c3481",
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
@@ -187,9 +198,20 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "down",
+                    "name": "Down",
                     "id": "cd5aa8ca-abc4-40a7-b22e-0c62b290c375",
                     "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "MoveVertical",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Left",
+                    "id": "8ca4d984-deea-4486-be95-9357ade8b0a7",
+                    "path": "",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -198,15 +220,48 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "",
-                    "id": "e449db32-55bb-49cf-a641-608ce569bff8",
-                    "path": "<Gamepad>/leftShoulder",
+                    "name": "Right",
+                    "id": "ab74687c-4928-4cc7-883d-a1e544dc0cad",
+                    "path": "",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Handbrake",
+                    "groups": "",
+                    "action": "MoveVertical",
                     "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "a1241faf-61d2-4974-8025-08e1155c584d",
+                    "path": "2DVector(mode=2)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveVertical",
+                    "isComposite": true,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "fb8fddac-30b2-41fa-9629-6ffc61e79638",
+                    "path": "<Joystick>/rz",
+                    "interactions": "",
+                    "processors": "Invert,Normalize(min=-1,max=1,zero=-1)",
+                    "groups": "Joystick",
+                    "action": "MoveVertical",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "d26c6b91-02e2-4724-88c6-cdfefe7419b3",
+                    "path": "<Joystick>/stick/y",
+                    "interactions": "",
+                    "processors": "Normalize(min=-1,max=1,zero=-1)",
+                    "groups": "Joystick",
+                    "action": "MoveVertical",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 },
                 {
                     "name": "",
@@ -215,6 +270,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
+                    "action": "Handbrake",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e449db32-55bb-49cf-a641-608ce569bff8",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad;Joystick",
                     "action": "Handbrake",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -236,7 +302,7 @@
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad",
+                    "groups": "Gamepad;Joystick",
                     "action": "Boosting",
                     "isComposite": false,
                     "isPartOfComposite": false

@@ -4,11 +4,11 @@ using System;
 
 public class inputManager : MonoBehaviour
 {
-    [HideInInspector]public float vertical;
-    [HideInInspector]public float horizontal;
-    [HideInInspector]public bool handbrake;
-    [HideInInspector]public bool boosting;
-    [HideInInspector]public bool gearUp;
+    [HideInInspector] public float vertical;
+    [HideInInspector] public float horizontal;
+    [HideInInspector] public bool handbrake;
+    [HideInInspector] public bool boosting;
+    [HideInInspector] public bool gearUp;
     [HideInInspector] public bool gearDown;
 
     public void OnMoveVertical(InputValue value) => vertical = value.Get<Vector2>().y;

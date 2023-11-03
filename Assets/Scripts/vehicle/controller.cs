@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 [RequireComponent(typeof(wheelsManager))]
@@ -12,6 +11,7 @@ public class controller : MonoBehaviour
         rearWheelDrive,
         allWheelDrive
     }
+
     [SerializeField] private driveType drive;
 
     //scripts ->
@@ -25,6 +25,7 @@ public class controller : MonoBehaviour
     private WheelCollider[] wheels;
     private GameObject centerOfMass;
     private Animator charAnim;
+
     [Header("Power Curve")]
     public AnimationCurve enginePower;
 
@@ -51,12 +52,12 @@ public class controller : MonoBehaviour
     private float totalPower;
     private float[] wheelSlip;
     private float finalTurnAngle;
-    private float radius  = 4;
-    private float wheelsRPM  ;
-    private float horizontal ;
+    private float radius = 4;
+    private float wheelsRPM;
+    private float horizontal;
     private float acceleration;
-    private float vertical ;
-    private float downforce ;
+    private float vertical;
+    private float downforce;
     private float gearChangeRate;
     private float brakPower;
     private float engineLerpValue;
@@ -64,7 +65,7 @@ public class controller : MonoBehaviour
     private float animatorTurnAngle;
 
     private bool reverse = false;
-    private bool lightsFlag; 
+    private bool lightsFlag;
     private bool grounded;
     private bool engineLerp;
     private bool gearUp;
@@ -90,14 +91,12 @@ public class controller : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(brakeLights != null)
-        {
-        activateLights();    
-        }
+        if (brakeLights != null)
+            activateLights();
+
         animatorTurnAngle = Mathf.Lerp(animatorTurnAngle , -horizontal , 20 * Time.deltaTime);
 
-        //steeringWheel.transform.Rotate(transform.up * animatorTurnAngle );
-        if(steeringWheel != null)
+        if (steeringWheel != null)
         {
             charAnim.SetFloat("turnAngle" , animatorTurnAngle);
             steeringWheel.transform.localRotation =Quaternion.Euler(0,animatorTurnAngle * 35 , 0);
@@ -113,20 +112,24 @@ public class controller : MonoBehaviour
 
     private void activateLights()
     {
-        if (IM.vertical < 0 || KPH <= 1) turnLightsOn();
-        else turnLightsOff();
+        if (IM.vertical < 0 || KPH <= 1)
+            turnLightsOn();
+        else
+            turnLightsOff();
     }
    
     private void turnLightsOn()
     {
-        if (lightsFlag) return;
+        if (lightsFlag)
+            return;
         brakeLights.SetColor("_EmissionColor", new Color(255f,35f,35f) * 0.115f);
         lightsFlag = true;
     }    
    
     private void turnLightsOff()
     {
-        if (!lightsFlag) return;
+        if (!lightsFlag)
+            return;
         brakeLights.SetColor("_EmissionColor", Color.black);
         lightsFlag = false;
     }
@@ -138,23 +141,18 @@ public class controller : MonoBehaviour
 
         acceleration = vertical > 0 ?  vertical : wheelsRPM <= 1 ? vertical  : 0 ;
         
-        if(!isGrounded())
-        {
-            acceleration = engineRPM > 1000 ? acceleration / 2 : acceleration; 
-        }
+        if (!isGrounded())
+            acceleration = engineRPM > 1000 ? acceleration / 2 : acceleration;
 
-        if(engineRPM >= maxRPM)
-        {
+        if (engineRPM >= maxRPM)
             setEngineLerp(maxRPM - 1000);
-        }
-        if(!engineLerp)
+        if (!engineLerp)
         {
             engineRPM = Mathf.Lerp(engineRPM,1000f + Mathf.Abs(wheelsRPM) *  finalDrive *  (gears[gearNum]) , (EngineSmoothTime * 10) * Time.deltaTime);
-            totalPower = enginePower.Evaluate(engineRPM) * (gears[gearNum] * finalDrive ) * acceleration  ;
+            totalPower = enginePower.Evaluate(engineRPM) * (gears[gearNum] * finalDrive ) * acceleration;
         }
              
         engineLoad = Mathf.Lerp(engineLoad,vertical - ((engineRPM - 1000) / maxRPM ),(EngineSmoothTime * 10) * Time.deltaTime);
-
         moveVehicle();
     }
 
@@ -162,22 +160,22 @@ public class controller : MonoBehaviour
     {
         float sum = 0;
         int R = 0;
+
         for (int i = 0; i < 4; i++)
         {
             sum += wheels[i].rpm;
             R++;
         }
+
         wheelsRPM = (R != 0) ? sum / R : 0;
  
-        if(wheelsRPM < 0 && !reverse )
+        if (wheelsRPM < 0 && !reverse)
         {
             reverse = true;
-            //if (gameObject.tag != "AI") manager.changeGear();
         }
-        else if(wheelsRPM > 0 && reverse)
+        else if (wheelsRPM > 0 && reverse)
         {
             reverse = false;
-            //if (gameObject.tag != "AI") manager.changeGear();
         }
     }
 
@@ -185,16 +183,18 @@ public class controller : MonoBehaviour
     {
         gearUp = IM.gearUp;
         gearDown = IM.gearDown;
-        if (gearUp == true && gearNum <= gears.Length && Time.time >= gearChangeRate )
+
+        if (gearUp == true && gearNum <= gears.Length && Time.time >= gearChangeRate)
         {
             gearNum  = gearNum +1;
             gearChangeRate = Time.time + 1f/3f ;
             setEngineLerp(engineRPM - ( engineRPM > 1500 ? 2000 : 700));
             audio.DownShift();
         }
-        if(gearDown == true && gearNum >= 1  && Time.time >= gearChangeRate)
+
+        if (gearDown == true && gearNum >= 1  && Time.time >= gearChangeRate)
         {
-            gearChangeRate = Time.time + 1f/3f ;
+            gearChangeRate = Time.time + 1f/3f;
             gearNum --;
             setEngineLerp(engineRPM - ( engineRPM > 1500 ? 1500 : 700));
             audio.DownShift();
@@ -203,18 +203,20 @@ public class controller : MonoBehaviour
 
     private void shifter()
     {
-        if(!isGrounded())return;
+        if (!isGrounded())
+            return;
 
-        if(engineRPM > maxRPM  && gearNum < gears.Length-1 && !reverse && Time.time >= gearChangeRate  && KPH >55)
+        if (engineRPM > maxRPM && gearNum < gears.Length-1 && !reverse && Time.time >= gearChangeRate && KPH >55)
         {
             gearNum ++;
             audio.DownShift();
             setEngineLerp(engineRPM - (engineRPM / 3));
-            gearChangeRate = Time.time + 1f/1f ;
+            gearChangeRate = Time.time + 1f/1f;
         }
-        if(engineRPM < minRPM && gearNum > 0 && Time.time >= gearChangeRate)
+
+        if (engineRPM < minRPM && gearNum > 0 && Time.time >= gearChangeRate)
         {
-            gearChangeRate = Time.time + 0.15f ;
+            gearChangeRate = Time.time + 0.15f;
             setEngineLerp(engineRPM + (engineRPM / 2));
             gearNum --;
         }
@@ -222,7 +224,7 @@ public class controller : MonoBehaviour
  
     public bool isGrounded()
     {
-        if(wheels[0].isGrounded &&wheels[1].isGrounded &&wheels[2].isGrounded &&wheels[3].isGrounded )
+        if (wheels[0].isGrounded && wheels[1].isGrounded && wheels[2].isGrounded && wheels[3].isGrounded)
             return true;
         else
             return false;
@@ -230,38 +232,36 @@ public class controller : MonoBehaviour
 
     private void moveVehicle()
     {
-        if(drive == driveType.rearWheelDrive)
+        if (drive == driveType.rearWheelDrive)
         {
             for (int i = 2; i < wheels.Length; i++)
             {
-                wheels[i].motorTorque = (vertical == 0) ? 0 : totalPower / (wheels.Length - 2) ;
+                wheels[i].motorTorque = (vertical == 0) ? 0 : totalPower / (wheels.Length - 2);
             }
         }
-        else if(drive == driveType.frontWheelDrive)
+        else if (drive == driveType.frontWheelDrive)
         {
             for (int i = 0; i < wheels.Length - 2; i++)
             {
-                wheels[i].motorTorque =  (vertical == 0) ? 0 : totalPower / (wheels.Length - 2) ;
+                wheels[i].motorTorque =  (vertical == 0) ? 0 : totalPower / (wheels.Length - 2);
             }
         }
         else
         {
             for (int i = 0; i < wheels.Length; i++)
             {
-                wheels[i].motorTorque =  (vertical == 0) ? 0 : totalPower / wheels.Length;
+                wheels[i].motorTorque = (vertical == 0) ? 0 : totalPower / wheels.Length;
             }
         }
 
         for (int i = 0; i < wheels.Length; i++)
         {
-            if(KPH <= 1 && KPH >= -1 && vertical == 0)
-            {
+            if (KPH <= 1 && KPH >= -1 && vertical == 0)
                 brakPower = 5;
-            }
             else
             {
-                if(vertical < 0 && KPH > 1 && !reverse)
-                    brakPower =  (wheelSlip[i] <= 0.3f) ? brakPower + -vertical * 100 : brakPower > 0 ? brakPower  + vertical * 50 : 0 ;
+                if (vertical < 0 && KPH > 1 && !reverse)
+                    brakPower =  (wheelSlip[i] <= 0.3f) ? brakPower + -vertical * 100 : brakPower > 0 ? brakPower + vertical * 50 : 0;
                 else 
                     brakPower = 0;
             }
@@ -279,21 +279,19 @@ public class controller : MonoBehaviour
     private void steerVehicle()
     {
         vertical = IM.vertical;
-        horizontal = Mathf.Lerp(horizontal , IM.horizontal , (IM.horizontal != 0) ? 2 * Time.deltaTime : 3 * 2 * Time.deltaTime);
+        horizontal = Mathf.Lerp(horizontal, IM.horizontal, (IM.horizontal != 0) ? 2 * Time.deltaTime : 3 * 2 * Time.deltaTime);
 
-        finalTurnAngle = (radius > 5 ) ? radius : 5  ;
+        finalTurnAngle = (radius > 5 ) ? radius : 5;
 
-        if (horizontal > 0 )
+        if (horizontal > 0)
         {
-			//rear tracks size is set to 1.5f       wheel base has been set to 2.55f
             wheels[0].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (finalTurnAngle - (1.5f / 2))) * horizontal;
             wheels[1].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (finalTurnAngle + (1.5f / 2))) * horizontal;
         }
-        else if (horizontal < 0 )
+        else if (horizontal < 0)
         {                                                          
             wheels[0].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (finalTurnAngle + (1.5f / 2))) * horizontal;
             wheels[1].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (finalTurnAngle - (1.5f / 2))) * horizontal;
-			//transform.Rotate(Vector3.up * steerHelping);
         }
         else
         {
@@ -308,8 +306,10 @@ public class controller : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         audio = GetComponent<engineAudio>();
         wheelsmanager = GetComponent<wheelsManager>();
-        if(steeringWheel != null)
-        charAnim = GameObject.FindGameObjectWithTag("char").GetComponent<Animator>();
+
+        if (steeringWheel != null)
+            charAnim = GameObject.FindGameObjectWithTag("char").GetComponent<Animator>();
+
         wheels = wheelsmanager.wheels;
         wheelSlip = new float[wheels.Length];
         rigidbody.centerOfMass = gameObject.transform.Find("centerOfMas").gameObject.transform.localPosition;   
@@ -329,28 +329,28 @@ public class controller : MonoBehaviour
         WheelHit hit;
         float sum = 0;
         float[] sidewaysSlip = new float[wheels.Length];
-        for (int i = 0; i < wheels.Length ; i++){
-            if(wheels[i].GetGroundHit(out hit) && i >= 2 )
+        for (int i = 0; i < wheels.Length ; i++)
+        {
+            if (wheels[i].GetGroundHit(out hit) && i >= 2)
             {
                 forwardFriction = wheels[i].forwardFriction;
-                forwardFriction.stiffness = (IM.handbrake)?  .55f : ForwardStifness; 
+                forwardFriction.stiffness = (IM.handbrake) ? .55f : ForwardStifness; 
                 wheels[i].forwardFriction = forwardFriction;
 
                 sidewaysFriction = wheels[i].sidewaysFriction;
-                sidewaysFriction.stiffness = (IM.handbrake)? .55f : SidewaysStifness;
+                sidewaysFriction.stiffness = (IM.handbrake) ? .55f : SidewaysStifness;
                 wheels[i].sidewaysFriction = sidewaysFriction;
                 
                 grounded = true;
 
                 sum += Mathf.Abs(hit.sidewaysSlip);
-
             }
             else grounded = false;
 
-            wheelSlip[i] = Mathf.Abs( hit.forwardSlip ) + Mathf.Abs(hit.sidewaysSlip) ;
+            wheelSlip[i] = Mathf.Abs( hit.forwardSlip) + Mathf.Abs(hit.sidewaysSlip);
             sidewaysSlip[i] = Mathf.Abs(hit.sidewaysSlip);
         }
-        sum /= wheels.Length - 2 ;
+        sum /= wheels.Length - 2;
         radius = (KPH > 60) ?  4 + (sum * -25) + KPH / 8 : 4;      
     }
    
@@ -362,15 +362,15 @@ public class controller : MonoBehaviour
 
     public void lerpEngine()
     {
-        if(engineLerp)
+        if (engineLerp)
         {
             totalPower = 0;
-            engineRPM = Mathf.Lerp(engineRPM,engineLerpValue,20 * Time.deltaTime );
+            engineRPM = Mathf.Lerp(engineRPM,engineLerpValue,20 * Time.deltaTime);
             engineLerp = engineRPM <= engineLerpValue + 100 ? false : true;
         }
     }   
 
-    private string s ;
+    private string s;
  
     void OnGUI()
     {
@@ -379,6 +379,7 @@ public class controller : MonoBehaviour
         {
             s +=  item.ToString("0.0") + " ";
         }
+
         float pos = 50;
 
         GUI.Label(new Rect(20, pos, 200, 20),"currentGear: " + gearNum.ToString("0"));

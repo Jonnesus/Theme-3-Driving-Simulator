@@ -185,7 +185,7 @@ public class controller : MonoBehaviour
         gearUp = IM.gearUp;
         gearDown = IM.gearDown;
 
-        if (gearUp == true && gearNum <= gears.Length && Time.time >= gearChangeRate)
+        if (gearUp == true && gearNum <= gears.Length-2 && Time.time >= gearChangeRate)
         {
             gearNum  = gearNum +1;
             gearChangeRate = Time.time + 1f/3f ;

@@ -3,16 +3,17 @@ using UnityEngine;
 [RequireComponent(typeof(wheelsManager))]
 [RequireComponent(typeof(engineAudio))]
 [RequireComponent(typeof(inputManager))]
+
 public class controller : MonoBehaviour
 {
-    internal enum driveType
+    public enum driveType
     {
         frontWheelDrive,
         rearWheelDrive,
         allWheelDrive
     }
 
-    [SerializeField] private driveType drive;
+    public driveType drive;
 
     //scripts ->
     private engineAudio audio;

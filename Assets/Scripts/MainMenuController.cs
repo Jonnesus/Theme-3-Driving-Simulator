@@ -4,9 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
+    [SerializeField] string menuScene = "StartScene";
     [SerializeField] string playScene = "Overworld";
 
-    [Tooltip("Drag in an options menu panel, if one exists")]
     [SerializeField] GameObject optionsMenuPanel;
     [SerializeField] GameObject optionsCloseButton;
     [SerializeField] GameObject optionsOpenButton;
@@ -31,7 +31,9 @@ public class MainMenuController : MonoBehaviour
 
     public void StartGame()
     {
+        Time.timeScale = 0;
         SceneManager.LoadScene(playScene);
+        SceneManager.UnloadSceneAsync(menuScene);
     }
 
     public void QuitGame()

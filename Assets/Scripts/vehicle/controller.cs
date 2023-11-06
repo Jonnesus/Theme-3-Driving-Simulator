@@ -48,7 +48,7 @@ public class controller : MonoBehaviour
     [HideInInspector] public float SidewaysStifness;
     [HideInInspector] public float KPH;
 
-    private int gearNum = 1;
+    private int gearNum = 0;
     private float engineRPM;
     private float totalPower;
     private float[] wheelSlip;
@@ -375,27 +375,27 @@ public class controller : MonoBehaviour
  
     void OnGUI()
     {
-        s = "";
+        /*s = "";
         foreach (float item in wheelSlip)
         {
             s +=  item.ToString("0.0") + " ";
-        }
+        }*/
 
-        float pos = 50;
+        float pos = 200;
 
-        GUI.Label(new Rect(20, pos, 200, 20),"currentGear: " + gearNum.ToString("0"));
+        GUI.Label(new Rect(20, pos, 200, 20),"Current Gear: " + (gearNum+1).ToString("0"));
         pos+=25f;
         GUI.HorizontalSlider(new Rect(20, pos, 200, 20), engineRPM,0,maxRPM);
         pos+=25f;
-        GUI.Label(new Rect(20, pos, 200, 20),"wheel slip: " + s);
-        pos+=25f;
+        //GUI.Label(new Rect(20, pos, 200, 20),"wheel slip: " + s);
+        //pos+=25f;
         GUI.Label(new Rect(20, pos, 200, 20),"Torque: " + totalPower.ToString("0"));
         pos+=25f;
         GUI.Label(new Rect(20, pos, 200, 20),"KPH: " + KPH.ToString("0"));
         pos+=25f;
-        GUI.HorizontalSlider(new Rect(20, pos, 200, 20), engineLoad, 0.0F, 1.0F);
-        pos+=25f;
-        GUI.Label(new Rect(20, pos, 200, 20),"brakes: " + brakPower.ToString("0"));
+        //GUI.HorizontalSlider(new Rect(20, pos, 200, 20), engineLoad, 0.0F, 1.0F);
+        //pos+=25f;
+        GUI.Label(new Rect(20, pos, 200, 20),"Brake Pressure: " + brakPower.ToString("0"));
         pos+=25f;        
     }
 }

@@ -8,6 +8,7 @@ public class CarSetupontroller : MonoBehaviour
     [SerializeField] GameObject checkManual;
     [SerializeField] GameObject checkAutomatic;
     [SerializeField] GameObject setupPanel;
+    [SerializeField] GameObject timePanel;
 
     [SerializeField] controller controller;
 
@@ -59,5 +60,6 @@ public class CarSetupontroller : MonoBehaviour
     {
         Time.timeScale = 1;
         setupPanel.SetActive(false);
+        timePanel.SetActive(true);
     }
 }

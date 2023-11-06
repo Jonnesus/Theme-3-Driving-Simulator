@@ -155,8 +155,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 5, y: -100}
-  m_SizeDelta: {x: -10, y: -200}
+  m_AnchoredPosition: {x: 5, y: -135}
+  m_SizeDelta: {x: -10, y: -270}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &9977152
 MonoBehaviour:
@@ -295,8 +295,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 5, y: -127.5}
-  m_SizeDelta: {x: -10, y: -255}
+  m_AnchoredPosition: {x: 5, y: -155}
+  m_SizeDelta: {x: -10, y: -310}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &244993140
 MonoBehaviour:
@@ -346,8 +346,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
-  m_fontSizeBase: 18
+  m_fontSize: 14
+  m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2180,8 +2180,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 5, y: 25}
-  m_SizeDelta: {x: -10, y: -110}
+  m_AnchoredPosition: {x: 5, y: 10}
+  m_SizeDelta: {x: -10, y: -140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1925350744
 MonoBehaviour:
@@ -2221,6 +2221,10 @@ MonoBehaviour:
 
     Manual Gears - Shift
     + Control (Keyboard), Right + Left Bumpers (Controller), Paddles (Sim Rig)
+
+
+    Pause
+    Game - Escape (Keyboard), North Button (Controller), SH (Sim Rig)
 
 
     Menu

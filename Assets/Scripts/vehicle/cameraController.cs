@@ -81,7 +81,7 @@ public class cameraController : MonoBehaviour
 
     public void updateCam()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetButtonDown("CameraToggle"))
         {
             cycleCamera();
         }    

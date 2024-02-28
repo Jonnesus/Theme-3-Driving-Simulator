@@ -16,7 +16,7 @@ public class controller : MonoBehaviour
     public driveType drive;
 
     //scripts ->
-    private engineAudio audio;
+    private engineAudio engineAudio;
     private inputManager IM;
     private wheelsManager wheelsmanager;
 
@@ -106,9 +106,9 @@ public class controller : MonoBehaviour
 
     void Audio()
     {
-        audio.totalPower = totalPower;
-        audio.engineRPM = engineRPM;
-        audio.engineLerp = engineLerp;
+        engineAudio.totalPower = totalPower;
+        engineAudio.engineRPM = engineRPM;
+        engineAudio.engineLerp = engineLerp;
     }
 
     private void activateLights()
@@ -190,7 +190,7 @@ public class controller : MonoBehaviour
             gearNum  = gearNum +1;
             gearChangeRate = Time.time + 1f/3f ;
             setEngineLerp(engineRPM - ( engineRPM > 1500 ? 2000 : 700));
-            audio.DownShift();
+            engineAudio.DownShift();
         }
 
         if (gearDown == true && gearNum >= 1  && Time.time >= gearChangeRate)
@@ -198,7 +198,7 @@ public class controller : MonoBehaviour
             gearChangeRate = Time.time + 1f/3f;
             gearNum --;
             setEngineLerp(engineRPM - ( engineRPM > 1500 ? 1500 : 700));
-            audio.DownShift();
+            engineAudio.DownShift();
         }  
     }
 
@@ -210,7 +210,7 @@ public class controller : MonoBehaviour
         if (engineRPM > maxRPM && gearNum < gears.Length-1 && !reverse && Time.time >= gearChangeRate && KPH >55)
         {
             gearNum ++;
-            audio.DownShift();
+            engineAudio.DownShift();
             setEngineLerp(engineRPM - (engineRPM / 3));
             gearChangeRate = Time.time + 1f/1f;
         }
@@ -305,7 +305,7 @@ public class controller : MonoBehaviour
     {
         IM = GetComponent<inputManager>();
         rigidbody = GetComponent<Rigidbody>();
-        audio = GetComponent<engineAudio>();
+        engineAudio = GetComponent<engineAudio>();
         wheelsmanager = GetComponent<wheelsManager>();
 
         if (steeringWheel != null)
@@ -315,7 +315,7 @@ public class controller : MonoBehaviour
         wheelSlip = new float[wheels.Length];
         rigidbody.centerOfMass = gameObject.transform.Find("centerOfMas").gameObject.transform.localPosition;   
 
-        audio.maxRPM = maxRPM;
+        engineAudio.maxRPM = maxRPM;
     }
 
     private void addDownForce()

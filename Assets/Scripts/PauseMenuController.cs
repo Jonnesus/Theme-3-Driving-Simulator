@@ -47,6 +47,5 @@ public class PauseMenuController : MonoBehaviour
     {
         pauseMenuPanel.SetActive(false);
         SceneManager.LoadScene(menuScene);
-        SceneManager.UnloadSceneAsync(playScene);
     }
 }

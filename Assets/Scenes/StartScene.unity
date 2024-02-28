@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2110153903}
-  m_IndirectSpecularColor: {r: 0.08036616, g: 0.09975593, b: 0.3011438, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -641,7 +641,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -1776,7 +1777,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee334f809793201499ea52665c6c73bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuScene: StartScene
   playScene: Overworld
   optionsMenuPanel: {fileID: 2053000717}
   optionsCloseButton: {fileID: 453307284}
